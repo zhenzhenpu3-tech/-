@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOVORIK-X | 全球智能户外解决方案领导者</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #0a0a0a;
+            --secondary-dark: #1a1a1a;
+            --accent-green: #00ff9d;
+            --accent-dark-green: #00cc7a;
+            --accent-light-green: #a3ffd9;
+            --accent-gold: #ffd700;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --gradient-bg: linear-gradient(135deg, #0a0a0a 0%, #0a2a1a 30%, #1a3a2a 60%, #2a4a3a 100%);
+            --gradient-green: linear-gradient(90deg, #00ff9d 0%, #00cc7a 100%);
+            --gradient-title: linear-gradient(90deg, #ffffff 0%, #a3ffd9 50%, #00ff9d 100%);
+            --gradient-button: linear-gradient(135deg, rgba(0, 40, 20, 0.8) 0%, rgba(0, 60, 30, 0.6) 50%, rgba(0, 80, 40, 0.4) 100%);
+            --gradient-header: linear-gradient(90deg, rgba(0, 60, 30, 0.9) 0%, rgba(10, 10, 10, 0.9) 100%);
+            --card-bg: rgba(30, 30, 30, 0.5);
+            --border-radius: 16px;
+            --transition: all 0.3s ease;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --glow: 0 0 20px rgba(0, 255, 157, 0.3);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--gradient-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* 三色高端背景：黑色+深绿色渐变+白色渐变 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(
+                    circle at 90% 10%,
+                    rgba(255, 255, 255, 0.05) 0%,
+                    transparent 20%
+                ),
+                radial-gradient(
+                    circle at 20% 80%,
+                    rgba(0, 60, 30, 0.4) 0%,
+                    transparent 40%
+                ),
+                linear-gradient(
+                    135deg,
+                    rgba(0, 0, 0, 1) 0%,
+                    rgba(10, 30, 20, 0.9) 30%,
+                    rgba(20, 50, 40, 0.8) 60%,
+                    rgba(30, 70, 60, 0.7) 100%
+                );
+            z-index: -1;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 头部样式 - 优化为从右侧绿色渐变到左侧黑色 */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--gradient-header);
+            backdrop-filter: blur(10px);
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0, 255, 157, 0.1);
+            transition: var(--transition);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: 900;
+            font-family: 'Arial Black', Impact, sans-serif;
+        }
+
+        .logo-black {
+            color: #000000;
+        }
+
+        .logo-green {
+            color: #32CD32;
+        }
+
+        .logo-text {
+            color: #000000;
+            font-family: 'Arial Black', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .logo-text-green {
+            color: #00FF9D;
+            font-family: 'Arial Black', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        /* 主横幅区域 */
+        .hero {
+            padding: 200px 0 150px;
+            background: 
+                linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.7)),
+                url('https://i.imgur.com/3Msinge.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                circle at 70% 30%,
+                rgba(0, 255, 157, 0.1) 0%,
+                transparent 50%
+            );
+        }
+
+        .hero-content {
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        /* 优化主标题：添加空格，两句话用空格分隔 */
+        .hero h1 {
+            font-size: 4.2rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: var(--gradient-title);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            letter-spacing: 0.5px;
+        }
+
+        /* 优化副标题 */
+        .hero-subtitle {
+            font-size: 2rem;
+            color: var(--accent-light-green);
+            margin-bottom: 40px;
+            font-weight: 300;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--gradient-button);
+            color: var(--text-primary);
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(0, 255, 157, 0.3);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: 0.5s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: var(--glow);
+            background: linear-gradient(135deg, rgba(0, 60, 30, 0.8) 0%, rgba(0, 80, 40, 0.6) 50%, rgba(0, 100, 50, 0.4) 100%);
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        /* 通用部分样式 - 标题全部居中 */
+        section {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+            text-align: center;
+            background: var(--gradient-title);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gradient-green);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            color: var(--accent-green);
+            font-size: 1.3rem;
+            margin-bottom: 50px;
+            text-align: center;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
+        }
+
+        /* 卡片样式 - 优化背景为透明渐变 */
+        .card {
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.5) 0%, rgba(40, 50, 40, 0.4) 100%);
+            border-radius: var(--border-radius);
+            padding: 35px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            height: 100%;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-green);
+        }
+
+        .card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: rgba(0, 255, 157, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 255, 157, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            color: var(--accent-light-green);
+            text-align: center;
+        }
+
+        /* 关于我们部分 - 优化背景为透明渐变 */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            text-align: left;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(40, 40, 40, 0.4) 0%, rgba(50, 60, 50, 0.3) 100%);
+            border-radius: var(--border-radius);
+            flex: 1;
+            margin: 0 10px;
+            transition: var(--transition);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            background: linear-gradient(135deg, rgba(40, 40, 40, 0.6) 0%, rgba(50, 60, 50, 0.5) 100%);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-green);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* 我们的使命部分 - 优化背景为透明渐变 */
+        .mission-section {
+            background: linear-gradient(135deg, rgba(0, 20, 10, 0.2) 0%, rgba(0, 30, 15, 0.1) 100%);
+        }
+
+        .mission-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .mission-item {
+            margin-bottom: 40px;
+            padding: 35px;
+            background: linear-gradient(135deg, rgba(40, 40, 40, 0.4) 0%, rgba(50, 60, 50, 0.3) 100%);
+            border-radius: var(--border-radius);
+            border-left: 5px solid var(--accent-green);
+            transition: var(--transition);
+        }
+
+        .mission-item:hover {
+            transform: translateX(10px);
+            background: linear-gradient(135deg, rgba(40, 40, 40, 0.6) 0%, rgba(50, 60, 50, 0.5) 100%);
+        }
+
+        .mission-title {
+            font-size: 1.8rem;
+            color: var(--accent-green);
+            margin-bottom: 15px;
+        }
+
+        /* OPE市场重要性部分 - 优化背景为透明渐变 */
+        .ope-market-section {
+            background: linear-gradient(135deg, rgba(0, 20, 10, 0.3) 0%, rgba(0, 30, 15, 0.2) 100%);
+        }
+
+        .ope-market-content {
+            text-align: left;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .ope-section {
+            margin-bottom: 50px;
+        }
+
+        .ope-section-title {
+            font-size: 2.2rem;
+            color: var(--accent-green);
+            margin-bottom: 20px;
+            border-left: 5px solid var(--accent-green);
+            padding-left: 20px;
+        }
+
+        .ope-subtitle {
+            font-size: 1.4rem;
+            color: var(--accent-light-green);
+            margin-bottom: 15px;
+        }
+
+        .ope-market-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .market-stat {
+            background: linear-gradient(135deg, rgba(40, 40, 40, 0.5) 0%, rgba(50, 60, 50, 0.4) 100%);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .market-stat:hover {
+            transform: translateY(-5px);
+            background: linear-gradient(135deg, rgba(40, 40, 40, 0.7) 0%, rgba(50, 60, 50, 0.6) 100%);
+        }
+
+        .market-stat-value {
+            font-size: 2.5rem;
+            color: var(--accent-green);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .market-stat-label {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .power-source-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .power-source-item {
+            background: linear-gradient(135deg, rgba(40, 40, 40, 0.5) 0%, rgba(50, 60, 50, 0.4) 100%);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            text-align: left;
+            transition: var(--transition);
+        }
+
+        .power-source-item:hover {
+            transform: translateY(-5px);
+            background: linear-gradient(135deg, rgba(40, 40, 40, 0.7) 0%, rgba(50, 60, 50, 0.6) 100%);
+        }
+
+        .power-source-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .power-source-name {
+            font-size: 1.4rem;
+            color: var(--accent-green);
+        }
+
+        .power-source-percentage {
+            font-size: 2rem;
+            color: var(--accent-light-green);
+            font-weight: 700;
+        }
+
+        .power-source-advantages, .power-source-limitations {
+            margin-top: 15px;
+        }
+
+        .power-source-subtitle {
+            color: var(--accent-light-green);
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        /* 产品展示部分 - 优化背景为透明渐变 */
+        .product-showcase {
+            background: linear-gradient(135deg, rgba(0, 20, 10, 0.2) 0%, rgba(0, 30, 15, 0.1) 100%);
+        }
+
+        .product-full-image {
+            width: 100%;
+            height: 500px;
+            border-radius: var(--border-radius);
+            margin-bottom: 60px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: var(--shadow);
+        }
+
+        .product-full-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-full-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* 三大产品线板块 - 一行三个小板块，优化背景为透明渐变 */
+        .product-categories {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .product-category {
+            text-align: center;
+            flex: 1;
+            background: linear-gradient(135deg, rgba(40, 40, 40, 0.5) 0%, rgba(50, 60, 50, 0.4) 100%);
+            border-radius: var(--border-radius);
+            padding: 30px 25px;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .product-category:hover {
+            transform: translateY(-10px) scale(1.05);
+            border-color: rgba(0, 255, 157, 0.3);
+            box-shadow: 0 15px 30px rgba(0, 255, 157, 0.1);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            color: var(--accent-green);
+            margin-bottom: 25px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .category-title {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            color: var(--accent-green);
+        }
+
+        /* AI IoT生态部分 - 新增板块 */
+        .ai-iot-section {
+            background: linear-gradient(135deg, rgba(0, 20, 10, 0.3) 0%, rgba(0, 30, 15, 0.2) 100%);
+        }
+
+        .ai-iot-content {
+            text-align: left;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .ai-iot-intro {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .ai-iot-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .ai-iot-column {
+            background: linear-gradient(135deg, rgba(40, 40, 40, 0.5) 0%, rgba(50, 60, 50, 0.4) 100%);
+            border-radius: var(--border-radius);
+            padding: 35px;
+            transition: var(--transition);
+        }
+
+        .ai-iot-column:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 255, 157, 0.1);
+        }
+
+        .ai-iot-column-title {
+            font-size: 1.8rem;
+            color: var(--accent-green);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .value-commitment-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .value-item {
+            background: linear-gradient(135deg, rgba(40, 40, 40, 0.5) 0%, rgba(50, 60, 50, 0.4) 100%);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .value-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 255, 157, 0.1);
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            color: var(--accent-green);
+            margin-bottom: 20px;
+        }
+
+        .value-title {
+            font-size: 1.4rem;
+            color: var(--accent-light-green);
+            margin-bottom: 15px;
+        }
+
+        /* 核心壁垒部分 - 优化背景为透明渐变 */
+        .barriers-section {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 20, 10, 0.2) 100%);
+        }
+
+        .barriers-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .barrier-item {
+            text-align: center;
+        }
+
+        .barrier-icon {
+            font-size: 3rem;
+            color: var(--accent-green);
+            margin-bottom: 25px;
+        }
+
+        .barrier-title {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            color: var(--accent-light-green);
+        }
+
+        /* 办公地点部分 - 优化背景为透明渐变 */
+        .locations-section {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 20, 10, 0.3) 100%);
+            padding: 100px 0;
+        }
+
+        .locations {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .location-card {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .location-icon {
+            font-size: 2.2rem;
+            color: var(--accent-green);
+            margin-bottom: 20px;
+        }
+
+        .location-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--accent-light-green);
+        }
+
+        /* 通用按钮样式 */
+        .section-button {
+            display: inline-block;
+            background: var(--gradient-button);
+            color: var(--text-primary);
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            border: 2px solid rgba(0, 255, 157, 0.3);
+            font-size: 16px;
+            box-shadow: var(--shadow);
+            margin-top: 20px;
+        }
+
+        .section-button:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--glow);
+            background: linear-gradient(135deg, rgba(0, 60, 30, 0.8) 0%, rgba(0, 80, 40, 0.6) 50%, rgba(0, 100, 50, 0.4) 100%);
+        }
+
+        /* 页脚 */
+        footer {
+            background: linear-gradient(135deg, rgba(10, 20, 15, 0.9) 0%, rgba(20, 30, 25, 0.8) 100%);
+            padding: 80px 0 40px;
+            border-top: 1px solid rgba(0, 255, 157, 0.1);
+            text-align: left;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            color: var(--accent-light-green);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-green);
+            transform: translateX(5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 1200px) {
+            .locations {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .barriers-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .ope-market-stats, .power-source-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .ai-iot-columns, .value-commitment-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .product-categories {
+                flex-wrap: wrap;
+            }
+            
+            .product-category {
+                flex: 1 0 calc(50% - 20px);
+                min-width: 250px;
+            }
+            
+            .barriers-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .locations {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.6rem;
+            }
+            
+            .ope-market-stats, .power-source-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .ai-iot-columns, .value-commitment-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .product-categories {
+                flex-direction: column;
+            }
+            
+            .product-category {
+                flex: 1 0 100%;
+            }
+            
+            .locations {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .stat-item {
+                margin: 0 0 20px 0;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .product-full-image {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部导航 -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <!-- 品牌标识 -->
+                <span class="logo-black">NOVORIK-</span><span class="logo-green">X</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- 主横幅区域 -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <!-- 优化标题：添加空格分隔两句话 -->
+                <h1>智启庭院新境 与世界共见不凡</h1>
+                <div class="hero-subtitle">重新定义智能户外生活</div>
+                
+                <a href="#mission" class="cta-button">探索使命 <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我们 -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">我们是谁</h2>
+            <p class="section-subtitle">研发投入占比70%的科技驱动型企业，专注园林类目跨境出海</p>
+            
+            <div class="about-content">
+                <div>
+                    <p>海翊科技有限公司是一家聚焦园林类目跨境出海的高新技术企业，正式成立于2024年7月12日。依托深圳作为全球科技与跨境贸易枢纽的区位优势，深耕户外智能装备与绿色能源领域。</p>
+                    <p>作为园林跨境出海赛道的新锐力量，海翊创新凭借"自有工厂+全链条供应链"的核心壁垒，打破传统户外产品"制造导向"的局限，构建了"研发-生产-销售-服务"一体化的出海体系。</p>
+                    
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-number">70%</div>
+                            <div class="stat-label">研发投入占比</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">4</div>
+                            <div class="stat-label">全球办公地点</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">3</div>
+                            <div class="stat-label">核心产品线</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">企业理念</h3>
+                    <p><strong>使命：</strong>以科技创新驱动产业升级，为全球用户创造持久价值。</p>
+                    <p><strong>愿景：</strong>成为全球领先的智能科技解决方案提供商，构建可持续发展的数字未来。</p>
+                    <p><strong>价值观：</strong>求真务实，以简致用，开放包容</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 我们的使命 -->
+    <section id="mission" class="mission-section">
+        <div class="container">
+            <h2 class="section-title">我们的使命</h2>
+            <p class="section-subtitle">以科技创新驱动产业升级，为全球用户创造持久价值</p>
+            
+            <div class="mission-content">
+                <div class="mission-item">
+                    <h3 class="mission-title">科技创新是核心起点</h3>
+                    <p>聚焦户外园林与绿色能源领域核心痛点，以AI、大数据、新能源等前沿技术为支撑，推动传统户外产品向智能化、环保化、场景化升级，解决真实世界复杂问题。</p>
+                </div>
+                
+                <div class="mission-item">
+                    <h3 class="mission-title">产业升级是核心聚焦</h3>
+                    <p>立足完善制造业基础，整合供应链优势，推动园林装备产业从"低端制造"向"高端智造"转型，提升中国户外品牌在全球市场的核心竞争力。</p>
+                </div>
+                
+                <div class="mission-item">
+                    <h3 class="mission-title">持久价值是最终标准</h3>
+                    <p>交付伴随用户长期发展、适配场景迭代的全生命周期解决方案，兼顾用户体验、环境效益与商业价值的统一，衡量一切成果的最终标准。</p>
+                </div>
+            </div>
+            
+            <a href="#ope-market" class="section-button">探索OPE市场 <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- OPE市场重要性部分 -->
+    <section id="ope-market" class="ope-market-section">
+        <div class="container">
+            <h2 class="section-title">为什么OPE市场至关重要？</h2>
+            <p class="section-subtitle">洞察全球户外动力设备市场，把握行业发展机遇</p>
+            
+            <div class="ope-market-content">
+                <!-- 一、什么是户外动力设备（OPE）？ -->
+                <div class="ope-section">
+                    <h3 class="ope-section-title">一、什么是户外动力设备（OPE）？</h3>
+                    
+                    <div style="margin-bottom: 30px;">
+                        <h4 class="ope-subtitle">核心定义</h4>
+                        <p>户外动力设备（Outdoor Power Equipment）是指用于户外空间维护、清洁和美化的各类机械化、动力化工具。这些设备通过高效的动力系统，为园林景观管理、庭院维护和户外清洁提供专业解决方案。</p>
+                    </div>
+                    
+                    <div>
+                        <h4 class="ope-subtitle">核心价值</h4>
+                        <p>赋能高效、便捷的庭院及户外空间管理，提升工作效率，降低劳动强度，确保园林景观的专业水准。</p>
+                    </div>
+                </div>
+                
+                <!-- 二、为什么OPE市场至关重要？ -->
+                <div class="ope-section">
+                    <h3 class="ope-section-title">二、为什么OPE市场至关重要？</h3>
+                    
+                    <!-- 市场数据统计 -->
+                    <div class="ope-market-stats">
+                        <div class="market-stat">
+                            <div class="market-stat-value">355亿美元</div>
+                            <div class="market-stat-label">2024年全球OPE市场规模</div>
+                        </div>
+                        
+                        <div class="market-stat">
+                            <div class="market-stat-value">5.2%</div>
+                            <div class="market-stat-label">未来5年年复合增长率</div>
+                        </div>
+                        
+                        <div class="market-stat">
+                            <div class="market-stat-value">78%</div>
+                            <div class="market-stat-label">DIY市场占比</div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="ope-subtitle">市场驱动因素</h4>
+                        <p>包括DIY文化兴起、城市绿化面积持续增加、消费者对美好居住环境的追求不断提升，以及环保意识推动的产品技术升级。无论是专业园林公司还是普通家庭用户，都对高效、环保的户外动力设备需求日益旺盛。</p>
+                    </div>
+                </div>
+                
+                <!-- 三、动力源分类：选择合适的驱动方案 -->
+                <div class="ope-section">
+                    <h3 class="ope-section-title">三、动力源分类：选择合适的驱动方案</h3>
+                    <p style="margin-bottom: 20px; color: var(--text-secondary);">（2024年全球户外动力设备市场份额，按动力源分类）</p>
+                    
+                    <div class="power-source-grid">
+                        <!-- 燃油动力 -->
+                        <div class="power-source-item">
+                            <div class="power-source-header">
+                                <div class="power-source-name">燃油动力</div>
+                                <div class="power-source-percentage">70%</div>
+                            </div>
+                            <div class="power-source-advantages">
+                                <div class="power-source-subtitle">优势</div>
+                                <p>功率强劲，续航时间长，适合大面积、高强度作业</p>
+                            </div>
+                            <div class="power-source-limitations">
+                                <div class="power-source-subtitle">局限</div>
+                                <p>噪音较大，有尾气排放，需定期维护保养</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 锂电池动力 -->
+                        <div class="power-source-item">
+                            <div class="power-source-header">
+                                <div class="power-source-name">锂电池动力</div>
+                                <div class="power-source-percentage">23%</div>
+                            </div>
+                            <div class="power-source-advantages">
+                                <div class="power-source-subtitle">优势</div>
+                                <p>移动灵活，噪音低，环保便捷，是当前市场主流趋势</p>
+                            </div>
+                            <div class="power-source-limitations">
+                                <div class="power-source-subtitle">发展空间</div>
+                                <p>电池技术快速进步，续航和功率持续提升</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 有线电动 -->
+                        <div class="power-source-item">
+                            <div class="power-source-header">
+                                <div class="power-source-name">有线电动</div>
+                                <div class="power-source-percentage">7%</div>
+                            </div>
+                            <div class="power-source-advantages">
+                                <div class="power-source-subtitle">优势</div>
+                                <p>动力稳定，重量轻，零排放，运行成本低</p>
+                            </div>
+                            <div class="power-source-limitations">
+                                <div class="power-source-subtitle">局限</div>
+                                <p>受电线长度限制，移动范围有限</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <a href="#products" class="section-button">探索产品矩阵 <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- 产品矩阵 -->
+    <section id="products" class="product-showcase">
+        <div class="container">
+            <h2 class="section-title">产品矩阵</h2>
+            <p class="section-subtitle">三大核心产品线，构建"能源+智能"一体化解决方案</p>
+            
+            <!-- 全产品总展示图 -->
+            <div class="product-full-image">
+                <img src="https://i.imgur.com/e8QCbq7.jpg" alt="Novorik-X全产品矩阵">
+            </div>
+            
+            <!-- 三大产品线概览 - 一行三个小板块 -->
+            <div class="product-categories">
+                <div class="product-category">
+                    <div class="category-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="category-title">OPE工具</h3>
+                    <p>户外动力设备，覆盖专业级与家用级全场景，实现园林作业智能化、轻量化升级</p>
+                </div>
+                
+                <div class="product-category">
+                    <div class="category-icon">
+                        <i class="fas fa-battery-full"></i>
+                    </div>
+                    <h3 class="category-title">户外储能</h3>
+                    <p>便携式、模块化、智能化储能解决方案，覆盖家庭户外、露营、应急备电等多元场景</p>
+                </div>
+                
+                <div class="product-category">
+                    <div class="category-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="category-title">智能庭院</h3>
+                    <p>"感知-控制-管理"一体化的智能庭院系统，实现庭院养护自动化、精准化、智能化</p>
+                </div>
+            </div>
+            
+            <a href="#ai-iot" class="section-button">了解AI IoT生态 <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- AI原生全球智能庭院IoT生态领军者 - 新增板块 -->
+    <section id="ai-iot" class="ai-iot-section">
+        <div class="container">
+            <h2 class="section-title">AI原生的全球智能庭院IoT生态领军者</h2>
+            <p class="section-subtitle">以AI技术创新驱动，构建全场景智能庭院生态</p>
+            
+            <div class="ai-iot-content">
+                <p class="ai-iot-intro">我们始终紧跟国家战略导向，深度响应"十四五""十五五"规划，精准锚定智能制造、智能机器人产业升级方向，以实际行动拥抱AI、发展AI。</p>
+                
+                <div class="ai-iot-columns">
+                    <div class="ai-iot-column">
+                        <h3 class="ai-iot-column-title">技术与生态层面</h3>
+                        <p>我们持续加大AI算法、IoT互联、绿色能源研发投入，致力于每年推出2-3款AI智能迭代产品，以技术创新保持行业领先；同时以三大核心机器人为基础，拓展庭院智能硬件品类，完善IoT生态闭环，用智能终端建设响应国家数字经济与新基建部署。</p>
+                    </div>
+                    
+                    <div class="ai-iot-column">
+                        <h3 class="ai-iot-column-title">价值承诺与合作层面</h3>
+                        <p>我们以"高端产品力 + 稳定交付 + 可持续发展"为主线，为全球伙伴提供可靠保障。我们以AI、大数据为引擎，打造端到端一体化智能科技解决方案，覆盖产品定制、技术支持、售后运维全链条，区别于传统销售模式；AI技术更深度渗透产品创新、生态运营与内部管理全场景，与国家政策同频共振，为数字中国、智慧社会与绿色未来贡献产业力量。</p>
+                    </div>
+                </div>
+                
+                <!-- 价值承诺的三个支柱 -->
+                <div class="value-commitment-grid">
+                    <div class="value-item">
+                        <div class="value-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h4 class="value-title">高标准质量</h4>
+                        <p>以研发、生产、检测多环节标准化管控，确保产品品质与安全性，筑牢智能制造基础。</p>
+                    </div>
+                    
+                    <div class="value-item">
+                        <div class="value-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h4 class="value-title">专业服务</h4>
+                        <p>通过独立站、售后支持与合作伙伴网络，形成24/7全天候服务、2年质保与30天退款保障的闭环，实现稳定交付。</p>
+                    </div>
+                    
+                    <div class="value-item">
+                        <div class="value-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h4 class="value-title">ESG导向</h4>
+                        <p>将环保、绿色能源与企业责任融入全流程，积极践行国家"双碳"战略，助力可持续发展。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <a href="#barriers" class="section-button">了解核心壁垒 <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- 核心壁垒 -->
+    <section id="barriers" class="barriers-section">
+        <div class="container">
+            <h2 class="section-title">核心壁垒</h2>
+            <p class="section-subtitle">构建可持续竞争优势的三大基石</p>
+            
+            <div class="barriers-grid">
+                <div class="card barrier-item">
+                    <div class="barrier-icon">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <h3 class="barrier-title">自有工厂</h3>
+                    <p>配备现代化生产流水线与严格的品控体系，可实现从产品研发打样到规模化量产的快速落地，大幅缩短交付周期。</p>
+                </div>
+                
+                <div class="card barrier-item">
+                    <div class="barrier-icon">
+                        <i class="fas fa-link"></i>
+                    </div>
+                    <h3 class="barrier-title">全链条供应链</h3>
+                    <p>整合上下游优质供应链资源，覆盖核心零部件采购、生产加工、物流仓储等全环节，形成强大的成本控制与供应链响应能力。</p>
+                </div>
+                
+                <div class="card barrier-item">
+                    <div class="barrier-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3 class="barrier-title">一体化出海体系</h3>
+                    <p>构建"研发-生产-销售-服务"一体化的出海体系，既能保障产品品质的稳定性，又能快速适配全球不同市场的差异化需求，为品牌出海奠定坚实基础。</p>
+                </div>
+            </div>
+            
+            <a href="#locations" class="section-button">查看全球布局 <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- 全球办公布局 - 已更新为最新信息 -->
+    <section id="locations" class="locations-section">
+        <div class="container">
+            <h2 class="section-title">全球办公布局</h2>
+            <p class="section-subtitle">总部统筹、多城联动，打造协同创新网络</p>
+            
+            <div class="locations">
+                <div class="card location-card">
+                    <div class="location-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3 class="location-title">深圳办公室</h3>
+                    <p>地址：深圳市南山区仙元路8号传音大厦21楼</p>
+                    <p>职能：聚焦市场营销、品牌运营与全球业务统筹</p>
+                </div>
+                
+                <div class="card location-card">
+                    <div class="location-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3 class="location-title">南京办公室</h3>
+                    <p>地址：南京建邺区金鹰世界A座11楼</p>
+                    <p>职能：侧重战略规划、产品研发，输出核心技术与创新方案</p>
+                </div>
+                
+                <div class="card location-card">
+                    <div class="location-icon">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <h3 class="location-title">苏州办公室</h3>
+                    <p>地址：苏州工业园区恒泰理想创新大厦B座3楼</p>
+                    <p>职能：聚焦产品研发与技术迭代，深耕AI智能控制等核心技术领域</p>
+                </div>
+                
+                <div class="card location-card">
+                    <div class="location-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3 class="location-title">上海办公室</h3>
+                    <p>地址：上海市杨浦区霍山路光大安石中心T2座</p>
+                    <p>职能：专注设计创新、海外市场与国际合作对接</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>NOVORIK-X</h3>
+                    <p>全球户外智能装备与绿色能源解决方案提供商，专注园林类目跨境出海，以AI技术与绿色能源融合为核心竞争力。</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>产品类别</h3>
+                    <ul class="footer-links">
+                        <li><a href="#products">OPE工具</a></li>
+                        <li><a href="#products">户外储能</a></li>
+                        <li><a href="#products">智能庭院</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>公司信息</h3>
+                    <ul class="footer-links">
+                        <li><a href="#about">关于我们</a></li>
+                        <li><a href="#mission">我们的使命</a></li>
+                        <li><a href="#ai-iot">AI IoT生态</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>关注我们</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                        <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2026 NOVORIK-X | 版本：10.0 | 最后更新：2026年3月</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 滚动时改变头部透明度
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if(window.scrollY > 100) {
+                header.style.background = 'rgba(0, 60, 30, 0.95)';
+            } else {
+                header.style.background = 'var(--gradient-header)';
+            }
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // 页面加载动画
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
